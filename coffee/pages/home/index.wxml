@@ -1,4 +1,3 @@
-<van-dialog id="van-dialog" />
 <view class="container">
     <scroll-view class="list-view fill-parent" scrollY="{{true}}">
         <swiper autoplay="{{true}}" circular="true" class="top-bannar" duration="{{500}}" indicatorDots="{{false}}" interval="{{4000}}">

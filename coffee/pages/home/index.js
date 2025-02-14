@@ -1,4 +1,3 @@
-import Dialog from 'vant-weapp/dialog/dialog';
 import i18n from '../../i18n/index';
 import { clearAll, getUserInfo, saveUserInfo } from '../../service/storage';
 import { setTabBar } from '../../utils/i18n';
@@ -122,17 +121,20 @@ Page({
 
     // 退出登录
     logout: function () {
-        Dialog.confirm({
-            confirmButtonText: i18n.t('确定'),
-            cancelButtonText: i18n.t('取消'),
+        wx.showModal({
             title: i18n.t('退出登录'),
-            message: i18n.t('退出登录后数据将全部清除'),
-        }).then(() => {
-            clearAll();
-            this.setData({ userInfo: null });
-            wx.showToast({
-                title: i18n.t('退出成功'),
-            })
+            content: i18n.t('退出登录后数据将全部清除'),
+            confirmText: i18n.t('确定'),
+            cancelText: i18n.t('取消'),
+            success: (res) => {
+                if (res.confirm) {
+                    clearAll();
+                    this.setData({ userInfo: null });
+                    wx.showToast({
+                        title: i18n.t('退出成功'),
+                    })
+                }
+            }
         });
     }
 })

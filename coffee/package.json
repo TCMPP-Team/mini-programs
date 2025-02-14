@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "dependencies": {
-    "vant-weapp": "^0.5.29"
-  },
+  "dependencies": {},
   "devDependencies": {
     "i18next-scanner": "^4.5.0"
   },

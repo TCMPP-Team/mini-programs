@@ -2,8 +2,5 @@
     "navigationStyle": "custom",
     "navigationBarTitleText": "",
     "transparentTitle": "auto",
-    "titlePenetrate": "YES",
-    "usingComponents": {
-        "van-dialog": "vant-weapp/dialog/index"
-    }
+    "titlePenetrate": "YES"
 }
