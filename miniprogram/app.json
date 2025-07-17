@@ -87,6 +87,7 @@
         "pages/device/memory/memory",
         "pages/device/device-motion/device-motion",
         "pages/device/nfc/nfc",
+        "pages/device/nfc/nfc-ios-test",
         "pages/device/hce/hce",
         "pages/device/calendar/calendar",
         "pages/device/encrypt/encrypt",
@@ -234,6 +235,11 @@
       "desc": "Your location will be used for the mini-program's location display",
       "desc-en": "where are you? do you know",
       "desc-ar": "انا من السعودية"
+    },
+    "scope.nfc": {
+      "desc": "NFC功能用于读取和写入NFC标签",
+      "desc-en": "NFC is used to read and write NFC tags",
+      "desc-ar": "يستخدم NFC لقراءة وكتابة علامات NFC"
     }
   },
   "sitemapLocation": "sitemap.json",

@@ -1,0 +1,163 @@
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
+<import src="../../../../common/foot_en.wxml" />
+
+<view class="container page">
+  <template is="head" data="{{title: 'iOS NFC Test'}}"/>
+  
+  <view class="page-body">
+    <!-- Status Display Section -->
+    <view class="status-section">
+      <view class="status-item">
+        <text class="status-label">Scan Status:</text>
+        <text class="status-value {{isScanning ? 'scanning' : 'stopped'}}">
+          {{isScanning ? '🔍 Scanning' : '⏹️ Stopped'}}
+        </text>
+      </view>
+      
+      <view class="status-item">
+        <text class="status-label">Connection Status:</text>
+        <text class="status-value {{isConnected ? 'connected' : 'disconnected'}}">
+          {{isConnected ? '🔗 Connected' : '🔌 Disconnected'}}
+        </text>
+      </view>
+      
+      <view class="status-item" wx:if="{{currentTech}}">
+        <text class="status-label">Current Technology:</text>
+        <text class="status-value tech">{{currentTech}}</text>
+      </view>
+      
+      <view class="status-item" wx:if="{{writeResult}}">
+        <text class="status-label">Write Result:</text>
+        <text class="status-value {{writeResult.includes('successful') ? 'success' : 'error'}}">
+          {{writeResult}}
+        </text>
+      </view>
+    </view>
+
+    <!-- Supported Technologies Section -->
+    <view class="tech-section" wx:if="{{supportedTechs.length > 0}}">
+      <text class="section-title">Supported Technologies:</text>
+      <view class="tech-list">
+        <text class="tech-tag" wx:for="{{supportedTechs}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- Control Section -->
+    <view class="control-section">
+      <text class="section-title">Control Operations:</text>
+      
+      <view class="button-group">
+        <button 
+          type="primary" 
+          bindtap="startScan" 
+          disabled="{{isScanning}}"
+          class="control-btn">
+          {{isScanning ? 'Scanning...' : 'Start Scan'}}
+        </button>
+        
+        <button 
+          type="default" 
+          bindtap="stopScan" 
+          disabled="{{!isScanning}}"
+          class="control-btn">
+          Stop Scan
+        </button>
+      </view>
+      
+      <view class="button-group" wx:if="{{isConnected}}">
+        <button 
+          type="warn" 
+          bindtap="disconnect" 
+          class="control-btn">
+          Disconnect
+        </button>
+        
+        <button 
+          type="primary" 
+          bindtap="writeData" 
+          class="control-btn">
+          Write Data
+        </button>
+      </view>
+      
+      <!-- HandleNfc Control Section -->
+      <view class="button-group" wx:if="{{currentTech}}">
+        <text class="section-subtitle">HandleNfc Operations:</text>
+        
+        <button 
+          type="primary" 
+          bindtap="connectWithHandleNfc" 
+          disabled="{{isConnected}}"
+          class="control-btn">
+          Connect (handleNfc)
+        </button>
+        
+        <button 
+          type="warn" 
+          bindtap="disconnectWithHandleNfc" 
+          disabled="{{!isConnected}}"
+          class="control-btn">
+          Disconnect (handleNfc)
+        </button>
+      </view>
+    </view>
+
+    <!-- Test Data Input Section -->
+    <view class="input-section">
+      <text class="section-title">Test Data:</text>
+      <input 
+        class="test-input" 
+        value="{{testData}}" 
+        bindinput="onInputChange"
+        placeholder="Enter test data to write"
+      />
+    </view>
+
+    <!-- Log Section -->
+    <view class="log-section">
+      <view class="log-header">
+        <text class="section-title">Operation Log:</text>
+        <button 
+          type="default" 
+          size="mini" 
+          bindtap="clearLog"
+          class="clear-btn">
+          Clear Log
+        </button>
+      </view>
+      
+      <scroll-view 
+        class="log-container" 
+        scroll-y="true" 
+        scroll-top="{{logMessages.length * 20}}">
+        <view 
+          class="log-item" 
+          wx:for="{{logMessages}}" 
+          wx:key="*this">
+          {{item}}
+        </view>
+        <view wx:if="{{logMessages.length === 0}}" class="empty-log">
+          No log information available
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- Instructions Section -->
+    <view class="instruction-section">
+      <text class="section-title">Usage Instructions:</text>
+      <view class="instruction-content">
+        <text class="instruction-item">1. Click "Start Scan" to begin NFC scanning</text>
+        <text class="instruction-item">2. Bring NFC device close to the back of your phone</text>
+        <text class="instruction-item">3. System will automatically connect and perform test operations</text>
+        <text class="instruction-item">4. Use "Connect (handleNfc)" for manual connection via handleNfc</text>
+        <text class="instruction-item">5. Use "Disconnect (handleNfc)" for manual disconnection via handleNfc</text>
+        <text class="instruction-item">6. Check the log for detailed operation process</text>
+        <text class="instruction-item">7. You can manually input test data and write again</text>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" wx:if="{{lang==='zh_CN'}}" />
+  <template is="foot_en" wx:else />
+</view> 

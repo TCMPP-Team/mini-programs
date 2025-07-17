@@ -1,0 +1,283 @@
+.page-body {
+  padding: 20rpx;
+}
+
+/* 状态显示区域 */
+.status-section {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 30rpx;
+  border: 1px solid #e9ecef;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.status-item:last-child {
+  border-bottom: none;
+}
+
+.status-label {
+  font-size: 28rpx;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.status-value {
+  font-size: 28rpx;
+  font-weight: 600;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+.status-value.scanning {
+  color: #007bff;
+  background: #e3f2fd;
+}
+
+.status-value.stopped {
+  color: #6c757d;
+  background: #f8f9fa;
+}
+
+.status-value.connected {
+  color: #28a745;
+  background: #d4edda;
+}
+
+.status-value.disconnected {
+  color: #dc3545;
+  background: #f8d7da;
+}
+
+.status-value.tech {
+  color: #6f42c1;
+  background: #e2d9f3;
+}
+
+.status-value.success {
+  color: #28a745;
+  background: #d4edda;
+}
+
+.status-value.error {
+  color: #dc3545;
+  background: #f8d7da;
+}
+
+/* 技术列表区域 */
+.tech-section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 15rpx;
+  display: block;
+}
+
+.section-subtitle {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 15rpx;
+  display: block;
+  text-align: center;
+  background: #e9ecef;
+  padding: 10rpx;
+  border-radius: 6rpx;
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.tech-tag {
+  background: #007bff;
+  color: white;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+/* 控制按钮区域 */
+.control-section {
+  margin-bottom: 30rpx;
+}
+
+.button-group {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.control-btn {
+  flex: 1;
+  height: 80rpx;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+}
+
+/* 输入区域 */
+.input-section {
+  margin-bottom: 30rpx;
+}
+
+.test-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #dee2e6;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  background: white;
+  box-sizing: border-box;
+}
+
+.test-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* 日志区域 */
+.log-section {
+  margin-bottom: 30rpx;
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.clear-btn {
+  font-size: 24rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 20rpx;
+}
+
+.log-container {
+  height: 400rpx;
+  background: #f8f9fa;
+  border: 2rpx solid #e9ecef;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.log-item {
+  font-size: 24rpx;
+  color: #495057;
+  line-height: 1.6;
+  margin-bottom: 8rpx;
+  word-break: break-all;
+  font-family: 'Courier New', monospace;
+}
+
+.empty-log {
+  text-align: center;
+  color: #6c757d;
+  font-size: 28rpx;
+  margin-top: 100rpx;
+}
+
+/* 使用说明区域 */
+.instruction-section {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8rpx;
+  padding: 20rpx;
+}
+
+.instruction-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.instruction-item {
+  font-size: 26rpx;
+  color: #856404;
+  line-height: 1.5;
+}
+
+/* 响应式设计 */
+@media (max-width: 750rpx) {
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .control-btn {
+    width: 100%;
+  }
+  
+  .log-container {
+    height: 300rpx;
+  }
+}
+
+/* 动画效果 */
+.status-value.scanning {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 深色主题支持 */
+@media (prefers-color-scheme: dark) {
+  .status-section {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+  
+  .status-label {
+    color: #a0aec0;
+  }
+  
+  .test-input {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .log-container {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+  
+  .log-item {
+    color: #e2e8f0;
+  }
+  
+  .instruction-section {
+    background: #744210;
+    border-color: #975a16;
+  }
+  
+  .instruction-item {
+    color: #faf089;
+  }
+} 
