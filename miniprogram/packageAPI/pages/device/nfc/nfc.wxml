@@ -12,6 +12,7 @@
     </view>
     <view class="btn-area">
       <button type="primary" bindtap="getNFCAdapter">getNFCAdapter</button>
+      <button type="default" bindtap="goToIOSTest" style="margin-top: 20rpx;">iOS NFC 测试</button>
     </view>
 
     <block wx:if="{{pairTech.length > 0}}">

@@ -226,6 +226,12 @@ Page({
     console.log(this.adapter, '---------------adapter');
   },
 
+  goToIOSTest() {
+    wx.navigateTo({
+      url: '/packageAPI/pages/device/nfc/nfc-ios-test'
+    });
+  },
+
   onLoad() {
     this.setData({
       t: i18n,
