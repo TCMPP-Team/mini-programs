@@ -1,0 +1,21 @@
+<t-navbar class="demo-navbar" title="ChatThinking" leftArrow />
+
+<view class="demo">
+  <t-demo-header
+    title="{{i18n.pages.chatThinking.headerTitle}}"
+    desc="{{i18n.pages.chatThinking.headerDesc}}"
+    notice="{{i18n.pages.chatThinking.notice}}"
+  />
+  <t-demo title="{{i18n.pages.chatThinking.demo01.title}}" desc="{{i18n.pages.chatThinking.demo01.desc}}">
+    <base />
+  </t-demo>
+  <t-demo title="{{i18n.pages.chatThinking.demo02.title}}" desc="{{i18n.pages.chatThinking.demo02.pendingDesc}}">
+    <pending />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.chatThinking.demo02.completeDesc}}">
+    <complete />
+  </t-demo>
+  <t-demo title="{{i18n.pages.chatThinking.demo03.title}}" desc="">
+    <layout />
+  </t-demo>
+</view>

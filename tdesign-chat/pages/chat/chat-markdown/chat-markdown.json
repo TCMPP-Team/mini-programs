@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "ChatMarkdown",
+  "usingComponents": {
+    "base": "./base",
+    "list": "./list",
+    "code": "./code",
+    "sheet": "./sheet",
+    "url": "./url",
+    "refer": "./refer"
+  }
+}

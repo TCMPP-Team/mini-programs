@@ -1,0 +1,14 @@
+<t-navbar class="demo-navbar" title="ChatActionbar" leftArrow />
+<view class="demo">
+  <t-demo-header
+    title="{{i18n.pages.chatActionbar.headerTitle}}"
+    desc="{{i18n.pages.chatActionbar.headerDesc}}"
+    notice="{{i18n.pages.chatActionbar.notice}}"
+  />
+  <t-demo title="{{i18n.pages.chatActionbar.demo01.title}}" desc="{{i18n.pages.chatActionbar.demo01.desc}}">
+    <base />
+  </t-demo>
+  <t-demo title="{{i18n.pages.chatActionbar.demo02.title}}" desc="{{i18n.pages.chatActionbar.demo02.desc}}">
+    <comment />
+  </t-demo>
+</view>

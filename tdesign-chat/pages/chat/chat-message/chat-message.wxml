@@ -1,0 +1,26 @@
+<t-navbar class="demo-navbar" title="ChatMessage" leftArrow />
+<view class="demo">
+  <t-demo-header
+    title="{{i18n.pages.chatMessage.headerTitle}}"
+    desc="{{i18n.pages.chatMessage.headerDesc}}"
+    notice="{{i18n.pages.chatMessage.notice}}"
+  />
+  <t-demo title="{{i18n.pages.chatMessage.demo01.title}}" desc="{{i18n.pages.chatMessage.demo01.desc}}">
+    <base />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.chatMessage.demo01.configDesc}}">
+    <configure />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.chatMessage.demo01.propsDesc}}">
+    <content />
+  </t-demo>
+  <t-demo title="{{i18n.pages.chatMessage.demo02.title}}" desc="{{i18n.pages.chatMessage.demo02.loadingDesc}}">
+    <status />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.chatMessage.demo02.errorDesc}}">
+    <error />
+  </t-demo>
+  <t-demo title="{{i18n.pages.chatMessage.demo03.title}}" desc="{{i18n.pages.chatMessage.demo03.bubbleDesc}}">
+    <style-component />
+  </t-demo>
+</view>

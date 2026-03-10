@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "ChatLoading",
+  "usingComponents": {
+    "t-skeleton": "tdesign-miniprogram/skeleton/skeleton",
+    "base": "./base",
+    "text": "./text"
+  }
+}

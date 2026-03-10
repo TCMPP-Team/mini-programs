@@ -1,0 +1,237 @@
+/**
+ * English (United States) - Demo Content
+ * Demo page content texts
+ */
+
+module.exports = {
+  // Chat Actionbar demos
+  chatActionbar: {
+    pageTitle: 'ChatActionbar',
+    title: 'ChatActionbar',
+    desc: 'Includes regenerate, like, dislike, and copy buttons. Built-in Clipboard can copy chat content, provides button interaction styles, and listens to action-related events for business layer implementation.',
+    notice: 'Rendering framework support: WebView',
+    copyContent:
+      'This content can be copied, and it supports Markdown.\n\n**Bold**\n*Italic*\n\n- List item 1\n- List item 2',
+    demo01: {
+      title: '01 Component Types',
+      desc: 'Basic Type',
+    },
+    demo02: {
+      title: '02 Component States',
+      desc: 'Manual Initialization State',
+    },
+  },
+
+  // Chat Content demos
+  chatContent: {
+    pageTitle: 'ChatContent',
+    title: 'ChatContent',
+    desc: 'Supports Markdown format rendering.',
+    notice: 'Rendering framework support: WebView',
+    demo01: {
+      title: '01 Component Types',
+    },
+    userContent: 'User Content Plain Text with HTML Escaping',
+    assistantContent: 'Assistant Content (Markdown)',
+    userText: 'This is plain text content sent by the user',
+  },
+
+  // Chat Loading demos
+  chatLoading: {
+    pageTitle: 'ChatLoading',
+    title: 'ChatLoading',
+    desc: 'Loading state component for chat scenarios.',
+    notice: 'Rendering framework support: WebView',
+    demo01: {
+      title: '01 Component Types',
+      desc: 'Supports multiple loading animation types, including gradient, moving, dots',
+    },
+    demo02: {
+      desc: 'Type with text description',
+    },
+    text: 'Loading...',
+    types: {
+      moving: 'Understanding...',
+      gradient: 'Deep thinking...',
+      circle: 'Loading...',
+    },
+  },
+
+  // Chat Markdown demos
+  chatMarkdown: {
+    pageTitle: 'ChatMarkdown',
+    title: 'ChatMarkdown',
+    desc: 'Component for rendering Markdown format text in chat scenarios, with built-in marked parser, supporting various Markdown syntax and configuration options.',
+    notice: 'Rendering framework support: WebView',
+    demo01: {
+      title: '01 Basic Markdown Styles',
+      titleDesc: 'Headings and Text',
+      listDesc: 'Lists',
+    },
+    demo02: {
+      title: '02 Code Blocks and Tables',
+      codeDesc: 'Code Blocks',
+      tableDesc: 'Tables',
+    },
+    demo03: {
+      title: '03 Images and Hyperlinks',
+    },
+    demo04: {
+      title: '04 Blockquotes',
+    },
+    samples: {
+      base: `# Markdown Feature Test (H1)
+
+## Basic Syntax Test (H2)
+
+### List Test
+
+- Unordered item 1
+- Unordered item 2
+    - Nested item 1 (4 spaces)
+    - Nested item 2 (4 spaces)
+
+1. Ordered item 1
+2. Ordered item 2
+    1. Nested ordered item 1
+    2. Nested ordered item 2
+
+### Code Block Test
+
+\`\`\`javascript
+function greet(name) {
+  console.log(\`Hello, \${name}!\`);
+}
+
+greet('Markdown');
+\`\`\`
+
+### Other Elements
+
+> Blockquote line 1
+> Blockquote line 2
+
+**Bold** _Italic_ ~~Strikethrough~~
+
+Here is a link: [TDesign](https://tdesign.tencent.com).
+`,
+      list: `- Item A\n- Item B\n    - Sub-item B.1\n    - Sub-item B.2\n`,
+      code: `\`\`\`js\nconsole.log('Hello, Markdown!');\n\`\`\`\n`,
+      sheet: `| Col 1 | Col 2 |\n| --- | --- |\n| A | B |\n| C | D |\n`,
+      url: `Link: [TDesign](https://tdesign.tencent.com)\n`,
+      refer: `> This is a blockquote.\n`,
+    },
+  },
+
+  // Chat Message demos
+  chatMessage: {
+    pageTitle: 'ChatItem',
+    title: 'ChatMessage',
+    desc: 'Used to display individual message items in chat conversations. It can show user avatars, nicknames, timestamps, and chat content, supporting multiple message states and style variants.',
+    notice: 'Rendering framework support: WebView',
+    demo01: {
+      title: '01 Component Types',
+      baseDesc: 'Basic Type',
+      configDesc: 'Configurable nickname, avatar, alignment',
+      attrDesc: 'Configure message attributes',
+    },
+    demo02: {
+      title: '02 Component States',
+      loadingDesc: 'Loading State',
+      errorDesc: 'Error State',
+    },
+    demo03: {
+      title: '03 Component Styles',
+      bubbleDesc: 'Bubble Style',
+    },
+    userName: 'Zhang San',
+    errorMessage: '´• •`!!! Request Error',
+    prompts: {
+      adPlan: 'Analyze the following content and write an ad plan',
+      analyze: 'Analyze the following',
+    },
+  },
+
+  // Chat Sender demos
+  chatSender: {
+    pageTitle: 'ChatSender',
+    title: 'ChatSender',
+    desc: 'Input box for AI chat, with extensible model and multimodal capabilities.',
+    notice: 'Rendering framework support: WebView',
+    demo01: {
+      title: '01 Component Types',
+      baseDesc: 'Basic Type',
+      uploadDesc: 'Upload Files',
+      contentDesc: 'Content Citation',
+      fileDesc: 'File Citation',
+    },
+    heightLimit: 'Height limit: Maximum height of 132px',
+    deepThink: 'Deep Thinking',
+    aiGenerated: 'Content generated by AI, for reference only',
+    sampleFile1: 'Image1.png',
+    sampleFile2: 'Document.pdf',
+    newFile: 'NewFile{{count}}.txt',
+  },
+
+  // Chat Thinking demos
+  chatThinking: {
+    pageTitle: 'ChatThinking',
+    title: 'ChatThinking',
+    desc: 'Component for displaying thinking process.',
+    notice: 'Rendering framework support: WebView',
+    demo01: {
+      title: '01 Component Types',
+      desc: 'Supports multiple loading animation types, including gradient, moving, dots',
+    },
+    demo02: {
+      title: '02 Component States',
+      thinkingDesc: 'Thinking',
+      completeDesc: 'Thinking Complete',
+    },
+    demo03: {
+      title: '03 Component Styles',
+      desc: '',
+    },
+    text: 'Well, the user is asking whether Newton\'s first law applies to all reference frames. This is a classic physics question involving the concept of inertial reference frames. I need to explain clearly that Newton\'s first law only holds in inertial reference frames. Non-inertial reference frames require the introduction of inertial forces.',
+    title: 'Thinking...',
+    thinkingProcess: 'Thinking Process',
+    completed: 'Thinking completed (took {{duration}} seconds)',
+    completedFixed: 'Deep thinking completed (took 19 seconds)',
+    stopped: 'Thinking stopped',
+    reset: 'Reset',
+  },
+
+  // Chat List demos
+  chatList: {
+    tabs: {
+      base: 'Basic Usage',
+      compose: 'Composed Usage',
+      custom: 'Custom',
+      writer: 'Copywriting Assistant',
+      image: 'Image Generation',
+      task: 'Task Planning',
+    },
+  },
+
+  // Attachments demos
+  attachments: {
+    clicked: 'Clicked {{name}}',
+    deleteSuccess: 'Deleted successfully',
+    addClicked: 'Clicked add button',
+    fileDeleteSuccess: 'File deleted successfully',
+    filesSelected: 'Selected {{count}} files',
+    unavailable: 'Currently unavailable',
+  },
+
+  // Citation content
+  citations: {
+    physics: 'Newton\'s first law does not apply to all reference frames. It only applies to inertial reference frames, which are reference frames that are at rest or moving at constant velocity relative to absolute space. In an inertial reference frame, if an object is not acted upon by an external force, it will remain at rest or in uniform linear motion.',
+    wordFile: 'WordFile.docx',
+  },
+
+  // Detailed thinking content
+  thinkingContent: {
+    title: 'Thinking completed (took 3 seconds)',
+    text: 'Okay, I need to answer the user\'s question about comparing contemporary idol romance dramas from the past 3 years and summarizing creative experiences\nQuerying online information...\nAccording to online search results, successful cases include "Spring Sends Love", "Love for a Long Time", "Your Day Will Come", etc., but lack specific viewership data. Need to combine industry reports to summarize common characteristics. The creative experiences of idol romance dramas from 2022-2024 mainly focus on innovative themes, realistic elements, fast-paced narratives, etc. Combining industry reports and successful cases, the following creative experiences are summarized.',
+  },
+};

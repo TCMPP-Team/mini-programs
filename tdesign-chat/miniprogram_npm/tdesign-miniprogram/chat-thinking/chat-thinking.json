@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "styleIsolation": "apply-shared",
+  "usingComponents": {
+    "t-chat-loading": "../chat-loading/chat-loading",
+    "t-icon": "../icon/icon"
+  }
+}

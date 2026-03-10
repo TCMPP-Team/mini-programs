@@ -1,0 +1,94 @@
+import { __awaiter, __decorate } from "tslib";
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import generateBase64Url from './utils/generateBase64Url';
+import randomMovingStyle from './utils/randomMovingStyle';
+import { appBaseInfo } from '../common/utils';
+const { prefix } = config;
+const name = `${prefix}-watermark`;
+let Watermark = class Watermark extends SuperComponent {
+    constructor() {
+        super(...arguments);
+        this.externalClasses = [`${prefix}-class`];
+        this.properties = props;
+        this.data = {
+            classPrefix: name,
+            watermarkStyle: {},
+        };
+        this.lifetimes = {
+            attached() {
+                this.renderWatermark();
+            },
+        };
+        this.observers = {
+            'watermarkContent, movable, rotate, x, y, width, height, alpha, lineSpace, moveInterval, zIndex, rotate, offset, removable, isRepeat, layout'() {
+                this.renderWatermark();
+            },
+        };
+        this.methods = {
+            watermarkColor() {
+                return appBaseInfo.theme === 'dark' ? 'rgba(238, 238, 238, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            },
+            renderWatermark() {
+                const query = wx.createSelectorQuery().in(this);
+                query
+                    .select('#watermarkCanvas')
+                    .fields({ node: true, size: true })
+                    .exec((res) => __awaiter(this, void 0, void 0, function* () {
+                    var _a;
+                    if (!((_a = res[0]) === null || _a === void 0 ? void 0 : _a.node)) {
+                        console.error('Canvas node not found');
+                        return;
+                    }
+                    const canvas = res[0].node;
+                    const props = this.properties;
+                    const gapX = props.movable ? 0 : props.x;
+                    const gapY = props.movable ? 0 : props.y;
+                    const offset = props.offset || [];
+                    const offsetLeft = offset[0] || gapX / 2;
+                    const offsetTop = offset[1] || gapY / 2;
+                    const bgImageOptions = {
+                        width: props.width,
+                        height: props.height,
+                        rotate: props.movable ? 0 : props.rotate,
+                        lineSpace: props.lineSpace,
+                        alpha: props.alpha,
+                        gapX: gapX,
+                        gapY: gapY,
+                        watermarkContent: props.watermarkContent,
+                        offsetLeft: offsetLeft,
+                        offsetTop: offsetTop,
+                        watermarkColor: this.watermarkColor(),
+                        layout: props.layout,
+                    };
+                    generateBase64Url(canvas, bgImageOptions, (base64Url, backgroundSize) => {
+                        let animationVars = {};
+                        if (props.movable) {
+                            const { left0, left25, left50, left75, top0, top25, top50, top75 } = randomMovingStyle();
+                            animationVars = {
+                                '--watermark-left-0': left0,
+                                '--watermark-left-25': left25,
+                                '--watermark-left-50': left50,
+                                '--watermark-left-75': left75,
+                                '--watermark-top-0': top0,
+                                '--watermark-top-25': top25,
+                                '--watermark-top-50': top50,
+                                '--watermark-top-75': top75,
+                            };
+                        }
+                        this.setData({
+                            watermarkStyle: Object.assign({ zIndex: props.zIndex, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: '100%', height: '100%', backgroundSize: `${(backgroundSize === null || backgroundSize === void 0 ? void 0 : backgroundSize.width) || gapX.value + props.width}px`, pointerEvents: 'none', backgroundRepeat: props.movable ? 'no-repeat' : 'repeat', backgroundImage: `url('${base64Url}')`, animation: props.movable ? `watermark infinite ${(props.moveInterval * 4) / 60}s` : 'none' }, animationVars),
+                        });
+                    });
+                }));
+            },
+        };
+    }
+};
+Watermark = __decorate([
+    wxComponent()
+], Watermark);
+export default Watermark;
+
+//# sourceMappingURL=watermark.js.map

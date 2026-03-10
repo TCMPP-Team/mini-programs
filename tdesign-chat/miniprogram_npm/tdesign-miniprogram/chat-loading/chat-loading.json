@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "styleIsolation": "apply-shared",
+  "usingComponents": {
+    "t-skeleton": "../skeleton/skeleton",
+    "t-loading": "../loading/loading"
+  }
+}

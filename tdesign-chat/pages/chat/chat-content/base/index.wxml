@@ -1,0 +1,13 @@
+<view class="chat-example">
+  <view class="title">{{i18n.pages.chatContent.base.userTextTitle}}</view>
+  <view class="chat-example-block">
+    <t-chat-content content="{{userContent}}" role="user"></t-chat-content>
+  </view>
+</view>
+
+<view class="chat-example">
+  <view class="title">{{i18n.pages.chatContent.base.assistantTextTitle}}</view>
+  <view class="chat-example-block">
+    <t-chat-content content="{{assistantContent}}" role="assistant"></t-chat-content>
+  </view>
+</view>

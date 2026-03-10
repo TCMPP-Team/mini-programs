@@ -1,0 +1,20 @@
+/* eslint-disable */
+const props = {
+    /** 链接列表。name 表示链接名称， url 表示链接 page 路径，目前只支持小程序内部跳转，openType 表示跳转方式 */
+    links: {
+        type: Array,
+        value: [],
+    },
+    /** 图标配置。`logo.icon` 表示图标链接地址，`logo.title` 表示标题文本，`logo.url` 表示链接 */
+    logo: {
+        type: Object,
+    },
+    /** 版权信息 */
+    text: {
+        type: String,
+        value: '',
+    },
+};
+export default props;
+
+//# sourceMappingURL=props.js.map

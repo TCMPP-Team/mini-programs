@@ -1,0 +1,20 @@
+<t-navbar class="demo-navbar" title="Attachments" leftArrow />
+<view class="demo">
+  <t-demo-header
+    title="{{i18n.pages.attachments.fileAttachments}}"
+    desc="{{i18n.pages.attachments.componentDesc}}"
+    notice="{{i18n.pages.attachments.notice}}"
+  />
+  <t-demo title="{{i18n.pages.attachments.demo01.title}}" desc="{{i18n.pages.attachments.demo01.imageType}}">
+    <base />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.attachments.demo01.fileType}}">
+    <file />
+  </t-demo>
+  <t-demo title="{{i18n.pages.attachments.demo02.title}}" desc="{{i18n.pages.attachments.demo02.imageLoading}}">
+    <imageLoading />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.attachments.demo02.fileLoading}}">
+    <fileLoading />
+  </t-demo>
+</view>

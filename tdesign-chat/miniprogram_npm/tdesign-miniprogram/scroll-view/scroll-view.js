@@ -1,0 +1,23 @@
+import { __decorate } from "tslib";
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import { canUseProxyScrollView } from '../common/version';
+const { prefix } = config;
+let ScrollView = class ScrollView extends SuperComponent {
+    constructor() {
+        super(...arguments);
+        this.externalClasses = [`${prefix}-class`];
+        this.behaviors = canUseProxyScrollView() ? ['wx://proxy-scroll-view'] : [];
+        this.properties = {
+            scrollIntoView: {
+                type: String,
+            },
+        };
+    }
+};
+ScrollView = __decorate([
+    wxComponent()
+], ScrollView);
+export default ScrollView;
+
+//# sourceMappingURL=scroll-view.js.map

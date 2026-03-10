@@ -1,0 +1,35 @@
+<view wx:if="{{privacy}}" class="privacy_wrap">
+  <view class="privacy_safe_area">
+    <view class="privacy_top">
+      <view class="privacy_title">{{i18nPrivacy.serviceTitle}}</view>
+      <view class="privacy_right">{{i18nPrivacy.publishDate}}</view>
+      <view class="privacy_right">{{i18nPrivacy.effectiveDate}}</view>
+    </view>
+    <view class="privacy_content">
+      <text class="privacy_bold">{{i18nPrivacy.preface}}</text>
+      <text decode="{{true}}" class="privacy_normal">{{i18nPrivacy.intro}}</text>
+      <text decode="{{true}}" class="privacy_bold">{{i18nPrivacy.declaration}}</text>
+      <text decode="{{true}}" class="privacy_normal">{{i18nPrivacy.contact}}</text>
+    </view>
+    <view class="footer">
+      <t-button class="t-design-button" theme="primary" bindtap="privacyConfirm">{{i18nPrivacy.acknowledge}}</t-button>
+    </view>
+  </view>
+</view>
+<view wx:if="{{win}}" class="privacy_tips_win">
+  <view class="privacy_win_content {{winStyle?'privacy_middle':''}}">
+    <view class="privacy_tips_content">
+      {{i18nPrivacy.tips1Prefix}}
+      <text class="privacy_url" bindtap="showPrivacyDetail">{{i18nPrivacy.linkText}}</text>
+      {{i18nPrivacy.tips1Suffix}}
+    </view>
+    <view class="privacy_tips_content">
+      {{i18nPrivacy.tips2Prefix}}
+      <text class="privacy_url" bindtap="showPrivacyDetail">{{i18nPrivacy.linkText}}</text>
+      {{i18nPrivacy.tips2Suffix}}
+    </view>
+    <view class="footer">
+      <t-button class="t-design-button" theme="primary" bindtap="privacyConfirm">{{i18nPrivacy.acknowledge}}</t-button>
+    </view>
+  </view>
+</view>

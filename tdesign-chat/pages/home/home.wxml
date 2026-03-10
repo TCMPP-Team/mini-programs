@@ -1,0 +1,32 @@
+<t-navbar title="{{i18nNavTitle}}">
+  <view slot="right" class="lang-switcher" bindtap="switchLanguage">
+    <text>{{currentLocale === 'zh-CN' ? 'EN' : 'CN'}}</text>
+  </view>
+</t-navbar>
+<view class="main">
+  <view class="title-wrap">
+    <image
+      class="title-icon"
+      mode="aspectFit"
+      src="/assets/{{theme === 'dark' ? 'TDesign-logo_dark' : 'TDesign-logo_light'}}.png"
+      aria-label="TDesign Logo"
+    />
+  </view>
+  <view class="desc">
+    {{i18nDesc}}
+  </view>
+  <pull-down-list
+    wx:for="{{list}}"
+    name="{{item.name}}"
+    icon="{{item.icon}}"
+    wx:key="name"
+    childArr="{{item.childArr}}"
+    bind:click="clickHandle"
+  />
+</view>
+<view class="footer">
+  <view class="show_privacy" bindtap="showPrivacyWin">{{i18nServiceLink}}</view>
+  <t-footer text="{{i18nFooterNotice}}"></t-footer>
+  <t-footer text="{{i18nFooterCopyright}}"></t-footer>
+</view>
+<trd-privacy id="trdPrivacy" name="{{i18nServiceName}}" date="{{i18nServiceDate}}" winStyle="{{winStyle}}"></trd-privacy>

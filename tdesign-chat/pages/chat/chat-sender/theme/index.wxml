@@ -1,0 +1,23 @@
+<view class="button-example">
+  <t-button size="large">{{i18n.pages.chatSender.theme.filled}}</t-button>
+  <t-button size="large" variant="outline">{{i18n.pages.chatSender.theme.outline}}</t-button>
+  <t-button size="large" variant="text">{{i18n.pages.chatSender.theme.text}}</t-button>
+</view>
+
+<view class="button-example">
+  <t-button size="large" theme="primary">{{i18n.pages.chatSender.theme.filled}}</t-button>
+  <t-button size="large" theme="primary" variant="outline">{{i18n.pages.chatSender.theme.outline}}</t-button>
+  <t-button size="large" theme="primary" variant="text">{{i18n.pages.chatSender.theme.text}}</t-button>
+</view>
+
+<view class="button-example">
+  <t-button size="large" theme="danger">{{i18n.pages.chatSender.theme.filled}}</t-button>
+  <t-button size="large" theme="danger" variant="outline">{{i18n.pages.chatSender.theme.outline}}</t-button>
+  <t-button size="large" theme="danger" variant="text">{{i18n.pages.chatSender.theme.text}}</t-button>
+</view>
+
+<view class="button-example">
+  <t-button size="large" theme="light">{{i18n.pages.chatSender.theme.filled}}</t-button>
+  <t-button size="large" theme="light" variant="outline">{{i18n.pages.chatSender.theme.outline}}</t-button>
+  <t-button size="large" theme="light" variant="text">{{i18n.pages.chatSender.theme.text}}</t-button>
+</view>

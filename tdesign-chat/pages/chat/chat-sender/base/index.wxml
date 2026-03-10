@@ -1,0 +1,47 @@
+<view class="demo-base-container">
+  <!-- Chat sender component -->
+  <view class="chat-sender-demo-wrapper">
+    <view class="chat-sender-height-limit">
+      <view class="chat-sender-height-left-limit"> </view>
+      <view class="chat-sender-height-right-limit"> </view>
+    </view>
+    <view class="chat-sender-placeholder"> {{i18n.common.chatSender.maxHeight}} </view>
+    <view class="chat-sender-wrapper">
+      <t-chat-sender
+        value="{{value}}"
+        loading="{{loading}}"
+        disabled="{{disabled}}"
+        placeholder="{{placeholder}}"
+        textareaProps="{{textareaProps}}"
+        fileList="{{fileList}}"
+        attachmentsProps="{{attachmentsProps}}"
+        renderPresets="{{renderPresets}}"
+        visible="{{visible}}"
+        bind:send="onSend"
+        bind:stop="onStop"
+        bind:focus="onFocus"
+        bind:blur="onBlur"
+        bind:change="onChange"
+        bind:uploadClick="onUploadClick"
+        bind:fileClick="onFileClick"
+        bind:fileDelete="onFileDelete"
+        bind:fileChange="onFileChange"
+        bind:fileAdd="onFileAdd"
+        bind:fileSelect="onFileSelect"
+        bind:updateVisible="onUpdateVisible"
+        bind:keyboardheightchange="onKeyboardHeightChange"
+      >
+        <view slot="footer-prefix" class="demo-footer-prefix">
+          <view class="deep-think-block {{deepThinkActive ? 'active' : ''}}" bind:tap="onDeepThinkTap">
+            <t-icon name="system-sum" size="40rpx" />
+            <text class="deep-think-text">{{i18n.common.chatSender.deepThink}}</text>
+          </view>
+          <view class="net-search-block {{ netSearchActive ? 'active' : '' }}" bind:tap="onNetSearchTap">
+            <t-icon name="internet" size="40rpx" />
+          </view>
+        </view>
+      </t-chat-sender>
+    </view>
+    <view class="demo-footer"> {{i18n.common.chatSender.aiDisclaimer}} </view>
+  </view>
+</view>

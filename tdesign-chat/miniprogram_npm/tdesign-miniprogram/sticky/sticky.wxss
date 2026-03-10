@@ -1,0 +1,3 @@
+@import '../common/style/index.wxss';.t-sticky {
+  position: relative;
+}

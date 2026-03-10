@@ -1,0 +1,51 @@
+{
+  "darkmode": true,
+  "pages": [
+    "pages/home/home"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/chat",
+      "name": "chat",
+      "pages": [
+        "chat-list/chat-list",
+        "chat-message/chat-message",
+        "chat-sender/chat-sender",
+        "chat-markdown/chat-markdown",
+        "chat-content/chat-content",
+        "chat-thinking/chat-thinking",
+        "attachments/attachments",
+        "chat-actionbar/chat-actionbar",
+        "chat-loading/chat-loading"
+      ]
+    }
+  ],
+  "style": "v2",
+  "themeLocation": "theme.json",
+  "usingComponents": {
+    "t-demo": "./components/demo-block/index",
+    "t-demo-header": "./components/demo-header/index",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
+  },
+  "window": {
+    "navigationBarTitleText": "TDesign",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "@navTxtStyle"
+  },
+  "resolveAlias": {
+    "@behaviors/*": "behaviors/*"
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "rendererOptions": {
+    "skyline": {
+      "disableABTest": true,
+      "defaultDisplayBlock": true,
+      "defaultContentBox": true,
+      "sdkVersionBegin": "3.4.3",
+      "sdkVersionEnd": "15.255.255"
+    }
+  }
+}

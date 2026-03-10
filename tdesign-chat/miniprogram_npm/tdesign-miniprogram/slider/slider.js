@@ -1,0 +1,461 @@
+import { __awaiter, __decorate } from "tslib";
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import { trimSingleValue, trimValue } from './tool';
+import props from './props';
+import { getRect } from '../common/utils';
+import { isString, isFunction } from '../common/validator';
+import Bus from '../common/bus';
+const { prefix } = config;
+const name = `${prefix}-slider`;
+let Slider = class Slider extends SuperComponent {
+    constructor() {
+        super(...arguments);
+        this.externalClasses = [
+            `${prefix}-class`,
+            `${prefix}-class-bar`,
+            `${prefix}-class-bar-active`,
+            `${prefix}-class-bar-disabled`,
+            `${prefix}-class-cursor`,
+        ];
+        this.options = {
+            pureDataPattern: /^__/,
+        };
+        this.properties = props;
+        this.controlledProps = [
+            {
+                key: 'value',
+                event: 'change',
+            },
+        ];
+        // 组件的内部数据
+        this.data = {
+            // 按钮样式列表
+            sliderStyles: '',
+            classPrefix: name,
+            initialLeft: null,
+            initialRight: null,
+            activeLeft: 0,
+            activeRight: 0,
+            maxRange: 0,
+            lineLeft: 0,
+            lineRight: 0,
+            dotTopValue: [0, 0],
+            _value: 0,
+            blockSize: 20,
+            isScale: false,
+            scaleArray: [],
+            scaleTextArray: [],
+            prefix,
+            realLabel: '',
+            extremeLabel: [],
+            isVisibleToScreenReader: false,
+            identifier: [-1, -1],
+            __inited: false,
+        };
+        this.observers = {
+            value(newValue) {
+                this.handlePropsChange(newValue);
+            },
+            _value(newValue) {
+                this.bus.on('initial', () => this.renderLine(newValue));
+                this.toggleA11yTips();
+            },
+            marks(val) {
+                this.bus.on('initial', () => this.handleMark(val));
+            },
+            label(val) {
+                this.setData({
+                    isShowLabel: Boolean(val),
+                });
+            },
+            'showExtremeValue, min, max'() {
+                this.getwExtremeLabel();
+            },
+        };
+        this.lifetimes = {
+            created() {
+                this.bus = new Bus();
+            },
+            attached() {
+                const { value } = this.properties;
+                if (!value)
+                    this.handlePropsChange(0);
+                this.init();
+                this.injectPageScroll();
+            },
+        };
+    }
+    getwExtremeLabel() {
+        const { showExtremeValue, min, max } = this.properties;
+        if (!showExtremeValue)
+            return;
+        this.setData({
+            extremeLabel: [this.getLabelByValue(Number(min), 'min'), this.getLabelByValue(Number(max), 'max')],
+        });
+    }
+    injectPageScroll() {
+        const { range, vertical } = this.properties;
+        if (!range || !vertical)
+            return;
+        const pages = getCurrentPages() || [];
+        let curPage = null;
+        if (pages && pages.length - 1 >= 0) {
+            curPage = pages[pages.length - 1];
+        }
+        if (!curPage)
+            return;
+        const originPageScroll = curPage === null || curPage === void 0 ? void 0 : curPage.onPageScroll;
+        curPage.onPageScroll = (rest) => {
+            originPageScroll === null || originPageScroll === void 0 ? void 0 : originPageScroll.call(this, rest);
+            this.observerScrollTop(rest);
+        };
+    }
+    observerScrollTop(rest) {
+        const { scrollTop } = rest || {};
+        this.pageScrollTop = scrollTop;
+    }
+    toggleA11yTips() {
+        this.setData({
+            isVisibleToScreenReader: true,
+        });
+        setTimeout(() => {
+            this.setData({
+                isVisibleToScreenReader: false,
+            });
+        }, 2000);
+    }
+    renderLine(val) {
+        const { min, max, range } = this.properties;
+        const { maxRange } = this.data;
+        if (range) {
+            const left = (maxRange * (val[0] - Number(min))) / (Number(max) - Number(min));
+            const right = (maxRange * (Number(max) - val[1])) / (Number(max) - Number(min));
+            // 因为要计算点相对于线的绝对定位，所以要取整条线的长度而非可滑动的范围
+            this.setLineStyle(left, right);
+        }
+        else {
+            this.setSingleBarWidth(val);
+        }
+    }
+    triggerValue(value) {
+        if (this.preval === value)
+            return;
+        this.preval = value;
+        this._trigger('change', {
+            value: trimValue(value, this.properties),
+        });
+    }
+    getLabelByValue(value, position) {
+        const { label } = this.properties;
+        if (isString(label)) {
+            let text = String(value);
+            try {
+                const rule = /\${value}%/g;
+                const enableToReplace = rule.test(label);
+                if (enableToReplace) {
+                    text = label.replace(rule, String(value));
+                }
+                else {
+                    text = label;
+                    throw new Error();
+                }
+            }
+            catch (e) {
+                console.warn(`fail to parse label prop, please pass string such as '\${value}%'`);
+            }
+            return text;
+        }
+        if (isFunction(label)) {
+            return label(value, position);
+        }
+        return String(value);
+    }
+    handlePropsChange(newValue) {
+        const value = trimValue(newValue, this.properties);
+        const realLabel = this.getLabelByValue(value);
+        this.triggerValue(value);
+        const setValueAndTrigger = () => {
+            this.setData({
+                _value: value,
+                realLabel,
+            });
+        };
+        // 基本样式未初始化，等待初始化后在改变数据。
+        if (this.data.maxRange === 0) {
+            this.init().then(setValueAndTrigger);
+            return;
+        }
+        setValueAndTrigger();
+    }
+    valueToPosition(value) {
+        const { min, max, theme } = this.properties;
+        const { blockSize, maxRange } = this.data;
+        const halfBlock = theme === 'capsule' ? Number(blockSize) / 2 : 0;
+        return Math.round(((Number(value) - Number(min)) / (Number(max) - Number(min))) * maxRange) + halfBlock;
+    }
+    handleMark(marks) {
+        const calcPos = (arr) => {
+            return arr.map((item) => ({
+                val: item,
+                left: this.valueToPosition(item),
+            }));
+        };
+        if ((marks === null || marks === void 0 ? void 0 : marks.length) && Array.isArray(marks)) {
+            this.setData({
+                isScale: true,
+                scaleArray: calcPos(marks),
+                scaleTextArray: [],
+            });
+        }
+        if (Object.prototype.toString.call(marks) === '[object Object]') {
+            const scaleArray = Object.keys(marks).map((item) => Number(item));
+            const scaleTextArray = scaleArray.map((item) => marks[item]);
+            this.setData({
+                isScale: scaleArray.length > 0,
+                scaleArray: calcPos(scaleArray),
+                scaleTextArray,
+            });
+        }
+    }
+    setSingleBarWidth(value) {
+        const width = this.valueToPosition(value);
+        this.setData({
+            lineBarWidth: `${width}px`,
+        });
+    }
+    init() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.data.__inited)
+                return;
+            const line = yield getRect(this, '#sliderLine');
+            const { blockSize } = this.data;
+            const { theme, vertical } = this.properties;
+            const halfBlock = Number(blockSize) / 2;
+            const { top, bottom, right, left } = line;
+            let maxRange = vertical ? bottom - top : right - left;
+            let initialLeft = vertical ? top : left;
+            let initialRight = vertical ? bottom : right;
+            if (initialLeft === 0 && initialRight === 0)
+                return;
+            if (theme === 'capsule') {
+                maxRange = maxRange - Number(blockSize) - 6; // 6 是边框宽度
+                initialLeft -= halfBlock;
+                initialRight -= halfBlock;
+            }
+            this.setData({
+                maxRange,
+                initialLeft,
+                initialRight,
+                __inited: true,
+            });
+            this.bus.emit('initial');
+        });
+    }
+    stepValue(value) {
+        const { step, min, max } = this.properties;
+        const decimal = String(step).indexOf('.') > -1 ? String(step).length - String(step).indexOf('.') - 1 : 0;
+        const closestStep = trimSingleValue(Number((Math.round(value / Number(step)) * Number(step)).toFixed(decimal)), Number(min), Number(max));
+        return closestStep;
+    }
+    // 点击滑动条的事件
+    onSingleLineTap(e) {
+        const { disabled } = this.properties;
+        if (disabled)
+            return;
+        const isSingleLineTap = this.data.identifier[0] === -1; // 区分点击滑动条和单游标的滑动
+        if (isSingleLineTap) {
+            const [touch] = e.changedTouches;
+            this.data.identifier[0] = touch.identifier;
+        }
+        const value = this.getSingleChangeValue(e);
+        if (isSingleLineTap) {
+            this.data.identifier[0] = -1;
+        }
+        this.triggerValue(value);
+    }
+    getSingleChangeValue(e) {
+        const { min, max, theme, vertical } = this.properties;
+        const { initialLeft, maxRange, blockSize } = this.data;
+        const touch = e.changedTouches.find((item) => item.identifier === this.data.identifier[0]);
+        const pagePosition = this.getPagePosition(touch);
+        let offset = 0;
+        if (theme === 'capsule') {
+            offset = Number(blockSize);
+            if (vertical) {
+                offset *= 2;
+            }
+            offset += 6;
+        }
+        else if (vertical) {
+            offset = Number(blockSize);
+        }
+        const currentLeft = pagePosition - initialLeft - offset;
+        let value = 0;
+        if (currentLeft <= 0) {
+            value = Number(min);
+        }
+        else if (currentLeft >= maxRange) {
+            value = Number(max);
+        }
+        else {
+            value = (currentLeft / maxRange) * (Number(max) - Number(min)) + Number(min);
+        }
+        return this.stepValue(value);
+    }
+    /**
+     * 将位置转换为值
+     *
+     * @param {number} posValue 位置数据
+     * @param {(0 | 1)} dir 方向： 0-left， 1-right
+     * @return  {number}
+     * @memberof Slider
+     */
+    convertPosToValue(posValue, dir) {
+        const { maxRange } = this.data;
+        const { max, min } = this.properties;
+        return dir === 0
+            ? (posValue / maxRange) * (Number(max) - Number(min)) + Number(min)
+            : Number(max) - (posValue / maxRange) * (Number(max) - Number(min));
+    }
+    // 点击范围选择滑动条的事件
+    onLineTap(e) {
+        const { disabled, theme, vertical } = this.properties;
+        const { initialLeft, initialRight, maxRange, blockSize } = this.data;
+        if (disabled)
+            return;
+        const [touch] = e.changedTouches;
+        const pagePosition = this.getPagePosition(touch);
+        const halfBlock = theme === 'capsule' ? Number(blockSize) / 2 : 0;
+        const currentLeft = pagePosition - initialLeft;
+        const currentRight = -(pagePosition - initialRight);
+        if (currentLeft < 0 || currentRight > maxRange + Number(blockSize))
+            return;
+        Promise.all([getRect(this, '#leftDot'), getRect(this, '#rightDot')]).then(([leftDot, rightDot]) => {
+            const pageScrollTop = this.pageScrollTop || 0;
+            // 点击处-halfblock 与 leftDot左侧的距离（绝对值）
+            const leftDotPosition = vertical ? leftDot.top + pageScrollTop : leftDot.left;
+            const distanceLeft = Math.abs(pagePosition - leftDotPosition - halfBlock);
+            // 点击处-halfblock 与 rightDot左侧的距离（绝对值）
+            const rightDotPosition = vertical ? rightDot.top + pageScrollTop : rightDot.left;
+            const distanceRight = Math.abs(rightDotPosition - pagePosition + halfBlock);
+            // 哪个绝对值小就移动哪个Dot
+            const isMoveLeft = distanceLeft < distanceRight;
+            let offset = 0;
+            if (theme === 'capsule') {
+                offset = Number(blockSize);
+                if (vertical) {
+                    offset *= 2;
+                }
+                offset += 6;
+            }
+            else if (vertical) {
+                offset = Number(blockSize);
+            }
+            if (isMoveLeft) {
+                // 当前leftdot中心 + 左侧偏移量 = 目标左侧中心距离
+                const left = pagePosition - initialLeft - offset;
+                const leftValue = this.convertPosToValue(left, 0);
+                this.triggerValue([this.stepValue(leftValue), this.data._value[1]]);
+            }
+            else {
+                let right = -(pagePosition - initialRight);
+                if (vertical) {
+                    right += offset / 2;
+                }
+                const rightValue = this.convertPosToValue(right, 1);
+                this.triggerValue([this.data._value[0], this.stepValue(rightValue)]);
+            }
+        });
+    }
+    onTouchStart(e) {
+        this.triggerEvent('dragstart', { e });
+        const [touch] = e.changedTouches;
+        if (e.currentTarget.id === 'rightDot') {
+            this.data.identifier[1] = touch.identifier;
+        }
+        else {
+            this.data.identifier[0] = touch.identifier;
+        }
+    }
+    onTouchMoveLeft(e) {
+        const { disabled, theme, vertical } = this.properties;
+        const { initialLeft, _value, blockSize } = this.data;
+        if (disabled)
+            return;
+        const touch = e.changedTouches.find((item) => item.identifier === this.data.identifier[0]);
+        const pagePosition = this.getPagePosition(touch);
+        let offset = 0;
+        if (theme === 'capsule') {
+            offset += Number(blockSize);
+        }
+        if (vertical) {
+            offset += Number(blockSize) + 6;
+        }
+        const currentLeft = pagePosition - initialLeft - offset;
+        const newData = [..._value];
+        const leftValue = this.convertPosToValue(currentLeft, 0);
+        newData[0] = this.stepValue(leftValue);
+        this.triggerValue(newData);
+    }
+    onTouchMoveRight(e) {
+        const { disabled, vertical } = this.properties;
+        const { initialRight, _value, blockSize } = this.data;
+        if (disabled)
+            return;
+        const touch = e.changedTouches.find((item) => item.identifier === this.data.identifier[1]);
+        const pagePosition = this.getPagePosition(touch);
+        let offset = 0;
+        if (vertical) {
+            offset += Number(blockSize) / 2 + 6;
+        }
+        const currentRight = -(pagePosition - initialRight - offset);
+        const newData = [..._value];
+        const rightValue = this.convertPosToValue(currentRight, 1);
+        newData[1] = this.stepValue(rightValue);
+        this.triggerValue(newData);
+    }
+    setLineStyle(left, right) {
+        const { theme } = this.properties;
+        const { blockSize, maxRange } = this.data;
+        const halfBlock = theme === 'capsule' ? Number(blockSize) / 2 : 0;
+        const [a, b] = this.data._value;
+        const cut = (v) => parseInt(v, 10);
+        this.setData({
+            dotTopValue: [a, b],
+            realLabel: [this.getLabelByValue(a, 'start'), this.getLabelByValue(b, 'end')],
+        });
+        if (left + right <= maxRange) {
+            this.setData({
+                lineLeft: cut(left + halfBlock),
+                lineRight: cut(right + halfBlock),
+            });
+        }
+        else {
+            this.setData({
+                lineLeft: cut(maxRange + halfBlock - right),
+                lineRight: cut(maxRange - left + halfBlock * 1.5),
+            });
+        }
+    }
+    onTouchEnd(e) {
+        this.triggerEvent('dragend', { e, value: this.data._value });
+        if (e.currentTarget.id === 'rightDot') {
+            this.data.identifier[1] = -1;
+        }
+        else {
+            this.data.identifier[0] = -1;
+        }
+    }
+    getPagePosition(touch) {
+        const { pageX, pageY } = touch;
+        const { vertical } = this.properties;
+        return vertical ? pageY : pageX;
+    }
+};
+Slider = __decorate([
+    wxComponent()
+], Slider);
+export default Slider;
+
+//# sourceMappingURL=slider.js.map

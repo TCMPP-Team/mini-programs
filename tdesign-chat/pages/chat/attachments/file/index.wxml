@@ -1,0 +1,10 @@
+<view class="chat-example">
+  <!-- Valid example: renders as single-line scrolling -->
+  <!-- <view class="chat-example-block">
+    <t-attachments items="{{items}}" bind:fileClick="onFileClick" bind:remove="onRemove" bind:add="onAdd" />
+  </view> -->
+
+  <view class="chat-example-block" wx:for="{{items}}" wx:for-item="item" wx:key="url">
+    <t-attachments items="{{[item]}}" bind:fileClick="onFileClick" bind:remove="onRemove" bind:add="onAdd" />
+  </view>
+</view>

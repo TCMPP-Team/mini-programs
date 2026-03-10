@@ -15,6 +15,7 @@ Tencent Cloud mini program platform, derived from Tencent mini program technolog
 ./coffee  -- order coffee mini program demo
 ./hotel  -- hotel mini program demo
 ./MPFeatureDemos  -- showcases various Mini Program features through practical examples
+./tdesign-chat  -- TDesign component library demo mini program
 ./README.md    -- README.md
 ````
 

@@ -1,0 +1,26 @@
+<t-navbar class="demo-navbar" title="ChatMarkdown" leftArrow />
+<view class="demo">
+  <t-demo-header
+    title="{{i18n.pages.chatMarkdown.headerTitle}}"
+    desc="{{i18n.pages.chatMarkdown.headerDesc}}"
+    notice="{{i18n.pages.chatMarkdown.notice}}"
+  />
+  <t-demo title="{{i18n.pages.chatMarkdown.demo01.title}}" desc="{{i18n.pages.chatMarkdown.demo01.desc}}">
+    <base />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.chatMarkdown.demo01.listDesc}}">
+    <list />
+  </t-demo>
+  <t-demo title="{{i18n.pages.chatMarkdown.demo02.title}}" desc="{{i18n.pages.chatMarkdown.demo02.codeDesc}}">
+    <code />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.chatMarkdown.demo02.tableDesc}}">
+    <sheet />
+  </t-demo>
+  <t-demo title="{{i18n.pages.chatMarkdown.demo03.title}}">
+    <url />
+  </t-demo>
+  <t-demo title="{{i18n.pages.chatMarkdown.demo04.title}}">
+    <refer />
+  </t-demo>
+</view>

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "ChatActionbar",
+  "usingComponents": {
+    "base": "./base",
+    "comment": "./comment"
+  }
+}

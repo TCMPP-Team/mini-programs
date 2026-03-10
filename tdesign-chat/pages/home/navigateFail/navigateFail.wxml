@@ -1,0 +1,7 @@
+<view class="demo">
+  <view class="container">
+    <t-icon name="{{failImage}}" size="224rpx" color="#DCDCDC" />
+    <view class="fail-error">{{i18n.pages.navigateFail.errorTitle}}</view>
+    <t-button class="fail-button" bind:tap="toHome">{{i18n.pages.navigateFail.backHome}}</t-button>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "styleIsolation": "apply-shared",
+  "usingComponents": {
+    "chat-message": "../chat-message/chat-message"
+  }
+}

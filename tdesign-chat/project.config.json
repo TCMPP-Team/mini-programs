@@ -1,0 +1,173 @@
+{
+	"description": "Project configuration file",
+	"packOptions": {
+		"ignore": [],
+		"include": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"scopeDataCheck": false,
+		"coverView": true,
+		"es6": true,
+		"postcss": false,
+		"compileHotReLoad": false,
+		"preloadBackgroundData": false,
+		"minified": true,
+		"autoAudits": false,
+		"newFeature": true,
+		"uglifyFileName": true,
+		"uploadWithSourceMap": true,
+		"useIsolateContext": true,
+		"nodeModules": true,
+		"enhance": false,
+		"useCompilerModule": true,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"showShadowRootInWxmlPanel": true,
+		"skylineRenderEnable": true,
+		"bigPackageSizeSupport": true,
+		"compileWorklet": false,
+		"packNpmManually": false,
+		"packNpmRelationList": [],
+		"minifyWXSS": true,
+		"minifyWXML": true,
+		"localPlugins": false,
+		"disableUseStrict": false,
+		"useCompilerPlugins": false,
+		"condition": false,
+		"swc": false,
+		"disableSWC": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"remoteDebugLogEnable": true,
+		"prefetch": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "3.11.3",
+	"appid": "wx02ca22f568f78235",
+	"projectname": "TDesign-y",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"editorSetting": {},
+	"TCSASappid": "mpwu85r8al4bkenk",
+	"scripts": {},
+	"TCSASLibVersion": "2.3.5",
+	"SASappid": "touristId",
+	"tmfLibVersion": "2.3.5",
+	"TCMPPappid": "mp8i9n79wdzgc49w",
+	"TCMPPLibVersion": "2.2.14",
+	"tcsasappid": "mph5959jnty0e7qv",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 3,
+			"list": [
+				{
+					"id": -1,
+					"name": "search",
+					"pathName": "pages/search/search",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "checkbox",
+					"pathName": "pages/checkbox/checkbox",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "guide",
+					"pathName": "pages/guide/guide",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "chat-list",
+					"pathName": "pages/chat/chat-list/chat-list",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "chat-message",
+					"pathName": "pages/chat-message/chat-message",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "chat-content",
+					"pathName": "pages/chat-content/chat-content",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "chat-actionbar",
+					"pathName": "pages/chat-actionbar/chat-actionbar",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "chat-loading",
+					"pathName": "pages/chat-loading/chat-loading",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "chat-thinking",
+					"pathName": "pages/chat-thinking/chat-thinking",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "attachments",
+					"pathName": "pages/attachments/attachments",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "chat-markdown",
+					"pathName": "pages/chat-markdown/chat-markdown",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "chat-sender",
+					"pathName": "pages/chat-sender/chat-sender",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

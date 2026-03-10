@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "styleIsolation": "shared",
+  "usingComponents": {
+    "chat-content": "../chat-content/chat-content",
+    "chat-thinking": "../chat-thinking/chat-thinking",
+    "chat-loading": "../chat-loading/chat-loading",
+    "attachments": "../attachments/attachments"
+  }
+}

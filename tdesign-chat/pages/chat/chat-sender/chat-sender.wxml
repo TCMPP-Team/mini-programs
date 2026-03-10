@@ -1,0 +1,20 @@
+<t-navbar class="demo-navbar" title="ChatSender" leftArrow />
+<view class="demo">
+  <t-demo-header
+    title="{{i18n.pages.chatSender.headerTitle}}"
+    desc="{{i18n.pages.chatSender.headerDesc}}"
+    notice="{{i18n.pages.chatSender.notice}}"
+  />
+  <t-demo title="{{i18n.pages.chatSender.demo01.title}}" desc="{{i18n.pages.chatSender.demo01.desc}}">
+    <base />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.chatSender.demo02.desc}}">
+    <attachments />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.chatSender.demo03.desc}}">
+    <content-citation />
+  </t-demo>
+  <t-demo desc="{{i18n.pages.chatSender.demo04.desc}}">
+    <file-citation />
+  </t-demo>
+</view>
