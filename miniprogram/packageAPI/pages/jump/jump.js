@@ -89,6 +89,75 @@ Page({
     })
   },
 
+  // Restart mini program with a valid path
+  restartminiprogramvalidpath() {
+    wx.restartMiniProgram({
+      path: '/packageComponent/pages/view/view/view?aaa=1',
+      /**
+ * 跳转成功后的回调，显示国际化提示信息
+ */
+success() {
+        wx.showToast({
+          title: i18n['jump12'],
+          icon: 'none',
+          duration: 2000
+        })
+      },
+      fail(err) {
+        console.log('=====restart fail', err);
+        wx.showToast({
+          title: i18n['jump13'],
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
+
+  // Restart mini program with an invalid path
+  restartminiprograminvalidpath() {
+    wx.restartMiniProgram({
+      path: '/packageComponent/pages/view/view/view1?aaa=1',
+      success() {
+        wx.showToast({
+          title: i18n['jump12'],
+          icon: 'none',
+          duration: 2000
+        })
+      },
+      fail(err) {
+        console.log('=====restart fail', err);
+        wx.showToast({
+          title: i18n['jump13'],
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
+
+  // Restart mini program and jump to tabbar page
+  restartminiprogramtabbar() {
+    wx.restartMiniProgram({
+      path: 'page/component/index',
+      success() {
+        wx.showToast({
+          title: i18n['jump12'],
+          icon: 'none',
+          duration: 2000
+        })
+      },
+      fail(err) {
+        console.log('=====restart fail', err);
+        wx.showToast({
+          title: i18n['jump13'],
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
+
   // Exit the current mini program
   exitminiprogram() {
     wx.exitMiniProgram({

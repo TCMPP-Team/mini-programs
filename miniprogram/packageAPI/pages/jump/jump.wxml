@@ -21,6 +21,15 @@
     <view class="btn-area">
       <button type="primary" data-mode="fingerPrint" bindtap="exitminiprogram">{{t['jump10']}}</button>
     </view>
+    <view class="btn-area">
+      <button type="primary" data-mode="fingerPrint" bindtap="restartminiprogramvalidpath">{{t['jump11']}}</button>
+    </view>
+    <view class="btn-area">
+      <button type="primary" data-mode="fingerPrint" bindtap="restartminiprograminvalidpath">{{t['jump14']}}</button>
+    </view>
+    <view class="btn-area">
+      <button type="primary" data-mode="fingerPrint" bindtap="restartminiprogramtabbar">{{t['jump15']}}</button>
+    </view>
   </view>
   <template is="foot" wx:if="{{lang==='zh_CN'}}" />
   <template is="foot_en" wx:else />
