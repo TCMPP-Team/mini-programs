@@ -118,6 +118,32 @@
           </view>
 
         </view>
+
+        <view style="text-align:center; margin-top: 20rpx;">------------------ subscriptionsSetting -----------------</view>
+        <view class="weui-cells weui-cells_after-title scope-cells">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">mainSwitch</view>
+            </view>
+            <view class="weui-cell__bd">
+              <icon wx:if="{{subscriptionsSetting.mainSwitch}}" class="icon-small" type="success_no_circle" size="23"></icon>
+              <text wx:else style="color:#999;">off</text>
+            </view>
+          </view>
+          <block wx:for="{{subscriptionsItems}}" wx:key="tmplId">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label" style="max-width: 400rpx; overflow: hidden; text-overflow: ellipsis;">{{item.tmplId}}</view>
+              </view>
+              <view class="weui-cell__bd" style="text-align: right;">
+                <text>{{item.status}}</text>
+              </view>
+            </view>
+          </block>
+          <view wx:if="{{subscriptionsItems.length === 0}}" class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd" style="color:#999;">itemSettings: empty</view>
+          </view>
+        </view>
       </view>
     </form>
   </view>

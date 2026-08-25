@@ -10,6 +10,8 @@ Page({
   data: {
     theme: 'light',
     setting: {},
+    subscriptionsSetting: {},
+    subscriptionsItems: [],
     index: 0,
     array: [
       'userLocation',
@@ -170,9 +172,20 @@ Page({
 
   getSetting() {
     wx.getSetting({
+      withSubscriptions: true,
       success: (res) => {
         console.log(res)
-        this.setData({ setting: res.authSetting })
+        const subscriptionsSetting = res.subscriptionsSetting || {}
+        const itemSettings = subscriptionsSetting.itemSettings || {}
+        const subscriptionsItems = Object.keys(itemSettings).map(tmplId => ({
+          tmplId,
+          status: itemSettings[tmplId]
+        }))
+        this.setData({
+          setting: res.authSetting,
+          subscriptionsSetting,
+          subscriptionsItems
+        })
       },
       fail: (err) => {
         console.log('===err', err)
